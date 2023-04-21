@@ -8,10 +8,24 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Line2D",
+"class": "DynamicBone2D",
+"language": "GDScript",
+"path": "res://addons/dynamic_bone_2d/dynamic_bone_2d.gd"
+} ]
+_global_script_class_icons={
+"DynamicBone2D": ""
+}
+
 [application]
 
 config/name="DinamicBone2D"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/dynamic_bone_2d/plugin.cfg" )
 
 [gui]
 
