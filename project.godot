@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="WigglyAppendage2D"
+run/main_scene="res://test/test.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
