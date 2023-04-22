@@ -10,22 +10,22 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Line2D",
-"class": "DynamicBone2D",
+"class": "WigglyAppendage2D",
 "language": "GDScript",
-"path": "res://addons/dynamic_bone_2d/dynamic_bone_2d.gd"
+"path": "res://addons/wiggly_appendage_2d/wiggly_appendage_2d.gd"
 } ]
 _global_script_class_icons={
-"DynamicBone2D": ""
+"WigglyAppendage2D": ""
 }
 
 [application]
 
-config/name="DinamicBone2D"
+config/name="WigglyAppendage2D"
 config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dynamic_bone_2d/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/wiggly_appendage_2d/plugin.cfg" )
 
 [gui]
 
@@ -40,4 +40,3 @@ common/enable_pause_aware_picking=true
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_environment="res://default_env.tres"
