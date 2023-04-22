@@ -39,6 +39,12 @@ export var max_angular_momentum: float = 25.13
 export var gravity := Vector2(0, 0)
 ## The amount of subdivisions to use for the line. This value should not be 1
 export(int, 0, 10) var subdivisions: int = 2
+## Add an aditional segment before start of the appendage to prevent it form appearing disconnected
+export var additional_start_segment := false
+## Length of the additional start segment 
+export var additional_start_segment_length: float = 10.0
+## If true, the additional start segment will be subdivided by the subdivisions parameter
+export var subdivide_additional_start_segment := true
 ## If true, only process when this node and all parents are visible
 export var only_process_when_visible := true
 
@@ -124,9 +130,13 @@ func _process_root_point(point: Array, delta: float):
 
 func _update_line():
 	var new_line_points := PoolVector2Array()
+	if additional_start_segment and subdivide_additional_start_segment:
+		new_line_points.append(Vector2(-additional_start_segment_length, 0))
 	for point in physics_points:
 		new_line_points.append(to_local(point[POSITION]))
 	new_line_points = _bezier_interpolate(new_line_points, subdivisions)
+	if additional_start_segment and not subdivide_additional_start_segment:
+		new_line_points.insert(0, Vector2(-additional_start_segment_length, 0))
 	points = new_line_points
 
 
