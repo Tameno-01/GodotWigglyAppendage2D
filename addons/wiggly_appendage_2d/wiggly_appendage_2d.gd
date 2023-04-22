@@ -18,11 +18,11 @@ export var segment_length: float = 30.0
 ## How much the appendge should curve
 export(float, -1.57, 1.57) var curvature: float = 0.0
 ## How much more the later parts of the appendge should curve
-export var curvature_exponent: float = 0.0
+export(float, -3.0, 3.0) var curvature_exponent: float = 0.0
 ## Max angle for every segment in degrees
-export(float, 0.0, 180.0, 0.01) var max_angle_degrees := 180.0 setget _set_per_segment_max_angle_degrees
+export(float, 0.0, 180.0, 0.01) var max_angle_degrees := 180.0 setget _set_max_angle_degrees
 ## Max angle for every segment in degrees. This is the actual value used in calculations
-var max_angle: float = TAU / 2 setget _set_per_segment_max_angle
+var max_angle: float = TAU / 2 setget _set_max_angle
 ## How fast the segemnt should rotate back to the target rotation once the max angle is reached in radians per seccond
 export(float, 0, 6.28) var comeback_speed := 0.0
 ## How stiff the tail should be
@@ -31,14 +31,14 @@ export var stiffness: float = 20.0
 export var stiffness_decay: float = 0.0
 ## The stiffness decay is raised to this power
 export var stiffness_decay_exponent: float = 1.0
+## The gravity acceleration to apply in pixels per second squared
+export var gravity := Vector2(0, 0)
 ## How much the appandge should slow down
 export var damping: float = 5.0
 ## The maximum rotational speed for every segment in radians per seccond
 export var max_angular_momentum: float = 25.13
-## The gravity acceleration to apply in pixels per second squared
-export var gravity := Vector2(0, 0)
-## The amount of subdivisions to use for the line. This value should not be 1
-export(int, 0, 10) var subdivisions: int = 2
+## How much the line should be subdivided to achieve a smoother look. This value should not be 1
+export(int, 0, 10) var subdivision: int = 2
 ## Add an aditional segment before start of the appendage to prevent it form appearing disconnected
 export var additional_start_segment := false
 ## Length of the additional start segment 
@@ -134,14 +134,14 @@ func _update_line():
 		new_line_points.append(Vector2(-additional_start_segment_length, 0))
 	for point in physics_points:
 		new_line_points.append(to_local(point[POSITION]))
-	new_line_points = _bezier_interpolate(new_line_points, subdivisions)
+	new_line_points = _bezier_interpolate(new_line_points, subdivision)
 	if additional_start_segment and not subdivide_additional_start_segment:
 		new_line_points.insert(0, Vector2(-additional_start_segment_length, 0))
 	points = new_line_points
 
 
-func _bezier_interpolate(line: PoolVector2Array, subdivisions: int) -> PoolVector2Array:
-	if subdivisions < 1: return line
+func _bezier_interpolate(line: PoolVector2Array, subdivision: int) -> PoolVector2Array:
+	if subdivision < 1: return line
 	if line.size() < 3: return line
 	var output := PoolVector2Array()
 	for i in range(line.size() - 1):
@@ -156,14 +156,14 @@ func _bezier_interpolate(line: PoolVector2Array, subdivisions: int) -> PoolVecto
 			var before_a := line[i - 1]
 			var angle := _angle_difference((b - a).angle(), (a - before_a).angle())
 			c = b + (b - a).rotated(angle)
-			actual_subdivisions = (subdivisions) / 2 + 1
+			actual_subdivisions = (subdivision) / 2 + 1
 		else:
 			c = line[c_index]
-			actual_subdivisions = subdivisions
+			actual_subdivisions = subdivision
 		var true_a = lerp(a, b, 0.5) if i != 0 else a
 		var true_c = lerp(b, c, 0.5)
 		for o in range(actual_subdivisions):
-			var t: float = 1.0 / subdivisions * o
+			var t: float = 1.0 / subdivision * o
 			var ab: Vector2 = lerp(true_a, b, t)
 			var bc: Vector2 = lerp(b, true_c, t)
 			output.append(lerp(ab, bc, t))
@@ -196,11 +196,11 @@ func _set_segment_count(value):
 	reset(segment_count + 1)
 
 
-func _set_per_segment_max_angle_degrees(value):
+func _set_max_angle_degrees(value):
 	max_angle_degrees = value
 	max_angle = deg2rad(value)
 
 
-func _set_per_segment_max_angle(value):
+func _set_max_angle(value):
 	max_angle = value
 	max_angle_degrees = rad2deg(value)
