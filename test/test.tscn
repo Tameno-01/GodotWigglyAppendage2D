@@ -49,8 +49,9 @@ anims/RESET = SubResource( 1 )
 
 [node name="WigglyAppendage2D" type="Line2D" parent="Sprite"]
 position = Vector2( 30, 0 )
-points = PoolVector2Array( 0, 0, 26.25, -0.00130988, 45, -0.00322781, 60, -0.00458623, 75, -0.00421757, 90, -0.00220681, 105, 0.00136109, 120, 0.00583925, 135, 0.0105808, 150, 0.0155858 )
+points = PoolVector2Array( 0, 0, 9.58333, 0, 18.3333, 0, 26.25, 0, 33.3333, 0, 39.5833, 0, 45, 0, 50, 0, 55, 0, 60, 0, 65, 0, 70, 0, 75, 0, 80, 0, 85, 0, 90, 0, 95, 0, 100, 0, 105, 0, 110, 0, 115, 0, 120, 0, 125, 0, 130, 0, 135, 0, 140, 0, 145, 0, 150, 0 )
 script = ExtResource( 2 )
+subdivision = 6
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

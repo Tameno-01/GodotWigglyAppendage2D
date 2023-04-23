@@ -2,10 +2,7 @@
 * text=auto eol=lf
 
 # Ignore some files when exporting.
-/.gitattributes            export-ignore
-/icon.png                  export-ignore
-/icon.png.import           export-ignore
-/LICENSE                   export-ignore
-/project.godot             export-ignore
-/README.md                 export-ignore
-/test                      export-ignore
+# Only include the addons folder when downloading from the Asset Library.
+/**        export-ignore
+/addons    !export-ignore
+/addons/** !export-ignore

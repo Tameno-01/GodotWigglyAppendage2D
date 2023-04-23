@@ -45,7 +45,7 @@ export var additional_start_segment := false
 export var additional_start_segment_length: float = 10.0
 ## If true, the additional start segment will be subdivided by the subdivisions parameter
 export var subdivide_additional_start_segment := true
-## If true, only process when this node and all parents are visible
+## If true, only process when this node and all parents aren't hidden
 export var only_process_when_visible := true
 
 
@@ -53,11 +53,11 @@ var physics_points: Array
 
 
 func _ready():
-	reset(segment_count + 1)
+	reset()
 
 
 func _physics_process(delta):
-	if not is_visible_in_tree() and only_process_when_visible:
+	if only_process_when_visible and not is_visible_in_tree():
 		return
 	for i in range(physics_points.size()):
 		if i == 0:
@@ -68,7 +68,7 @@ func _physics_process(delta):
 
 
 ## Deletes all existing physics points and add the specified amount of new ones
-func reset(point_count: int) -> void:
+func reset(point_count: int = segment_count + 1) -> void:
 	physics_points = []
 	var starting_pos := get_global_position()
 	var current_pos := starting_pos
@@ -193,7 +193,7 @@ func _get_true_curvarute() -> float:
 
 func _set_segment_count(value):
 	segment_count = value
-	reset(segment_count + 1)
+	reset()
 
 
 func _set_max_angle_degrees(value):
