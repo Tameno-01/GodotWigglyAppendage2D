@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://test/go_to_mouse.gd" type="Script" id=1]
 [ext_resource path="res://addons/wiggly_appendage_2d/wiggly_appendage_2d.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://test/GodotWigglyAppendage_tail_asset.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -48,10 +49,24 @@ anims/RESET = SubResource( 1 )
 "anims/wiggle wiggle" = SubResource( 2 )
 
 [node name="WigglyAppendage2D" type="Line2D" parent="Sprite"]
-position = Vector2( 30, 0 )
-points = PoolVector2Array( 0, 0, 9.58333, 0, 18.3333, 0, 26.25, 0, 33.3333, 0, 39.5833, 0, 45, 0, 50, 0, 55, 0, 60, 0, 65, 0, 70, 0, 75, 0, 80, 0, 85, 0, 90, 0, 95, 0, 100, 0, 105, 0, 110, 0, 115, 0, 120, 0, 125, 0, 130, 0, 135, 0, 140, 0, 145, 0, 150, 0 )
+position = Vector2( -30, 0 )
+rotation = 3.14159
+points = PoolVector2Array( 0, 0, 11.9263, 7.44805, 22.1968, 14.0023, 30.8115, 19.6628, 37.7704, 24.4295, 42.6509, 29.0122, 45.0302, 34.1205, 44.9084, 39.7544, 42.2856, 45.9139, 38.8349, 50.598, 36.2297, 51.8055, 34.4699, 49.5364, 33.5556, 43.7909, 34.0395, 37.4512, 36.4742, 33.3999, 40.8597, 31.637, 47.196, 32.1625, 53.1324, 34.4396, 56.318, 37.9314 )
+width = 30.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 4 )
+texture_mode = 2
 script = ExtResource( 2 )
-subdivision = 6
+curvature = 0.137
+curvature_exponent = 0.714
+subdivision = 4
+
+[node name="WigglyAppendage2D2" type="Line2D" parent="Sprite"]
+position = Vector2( 30, 0 )
+points = PoolVector2Array( 0, 0, 18.4235, 18.5585, 29.9421, 33.1758, 38.9614, 44.9505, 49.8871, 54.9816, 62.1089, 60.0932, 75.0161, 57.1096, 88.0604, 49.7361, 100.693, 41.6779, 112.879, 32.9588 )
+script = ExtResource( 2 )
+stiffness = 0.0
+gravity = Vector2( 0, 20 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
