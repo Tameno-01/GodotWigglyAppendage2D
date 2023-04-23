@@ -1,4 +1,4 @@
-tool
+@tool
 extends Line2D
 class_name WigglyAppendage2D
 
@@ -12,41 +12,41 @@ enum {
 
 
 ## Amout of segments
-export(int, 1, 10) var segment_count: int = 5 setget _set_segment_count
+@export_range(1, 10) var segment_count: int = 5 :set = _set_segment_count
 ## Length of segments
-export var segment_length: float = 30.0
+@export var segment_length: float = 30.0
 ## How much the appendge should curve
-export(float, -1.57, 1.57) var curvature: float = 0.0
+@export_range( -1.57, 1.57) var curvature: float = 0.0
 ## How much more the later parts of the appendge should curve
-export(float, -3.0, 3.0) var curvature_exponent: float = 0.0
+@export_range( -3.0, 3.0) var curvature_exponent: float = 0.0
 ## Max angle for every segment in degrees
-export(float, 0.0, 180.0, 0.01) var max_angle_degrees := 180.0 setget _set_max_angle_degrees
+@export_range( 0.0, 180.0, 0.01) var max_angle_degrees := 180.0 :set = _set_max_angle_degrees
 ## Max angle for every segment in degrees. This is the actual value used in calculations
-var max_angle: float = TAU / 2 setget _set_max_angle
+var max_angle: float = TAU / 2 :set = _set_max_angle
 ## How fast the segemnt should rotate back to the target rotation once the max angle is reached in radians per seccond
-export(float, 0, 6.28) var comeback_speed := 0.0
+@export_range(0, 6.28) var comeback_speed := 0.0
 ## How stiff the tail should be
-export var stiffness: float = 20.0
+@export var stiffness: float = 20.0
 ## How much the stiffness should be lowered for the later parts of the appendage
-export var stiffness_decay: float = 0.0
+@export var stiffness_decay: float = 0.0
 ## The stiffness decay is raised to this power
-export var stiffness_decay_exponent: float = 1.0
+@export var stiffness_decay_exponent: float = 1.0
 ## The gravity acceleration to apply in pixels per second squared
-export var gravity := Vector2(0, 0)
+@export var gravity := Vector2(0, 0)
 ## How much the appandge should slow down
-export var damping: float = 5.0
+@export var damping: float = 5.0
 ## The maximum rotational speed for every segment in radians per seccond
-export var max_angular_momentum: float = 25.13
+@export var max_angular_momentum: float = 25.13
 ## How much the line should be subdivided to achieve a smoother look. This value should not be 1
-export(int, 0, 10) var subdivision: int = 2
+@export_range(0, 10) var subdivision: int = 2
 ## Add an aditional segment before start of the appendage to prevent it form appearing disconnected
-export var additional_start_segment := false
+@export var additional_start_segment := false
 ## Length of the additional start segment 
-export var additional_start_segment_length: float = 10.0
+@export var additional_start_segment_length: float = 10.0
 ## If true, the additional start segment will be subdivided by the subdivisions parameter
-export var subdivide_additional_start_segment := true
+@export var subdivide_additional_start_segment := true
 ## If true, only process when this node and all parents aren't hidden
-export var only_process_when_visible := true
+@export var only_process_when_visible := true
 
 
 var physics_points: Array
@@ -88,8 +88,8 @@ func reset(point_count: int = segment_count + 1) -> void:
 
 
 ## Returns the global positions of all points in the appendage
-func get_global_point_positions() -> PoolVector2Array:
-	var output := PoolVector2Array()
+func get_global_point_positions() -> PackedVector2Array:
+	var output := PackedVector2Array()
 	for point in physics_points:
 		output.append(point[POSITION])
 	return output
@@ -129,7 +129,7 @@ func _process_root_point(point: Array, delta: float):
 
 
 func _update_line():
-	var new_line_points := PoolVector2Array()
+	var new_line_points := PackedVector2Array()
 	if additional_start_segment and subdivide_additional_start_segment:
 		new_line_points.append(Vector2(-additional_start_segment_length, 0))
 	for point in physics_points:
@@ -140,10 +140,10 @@ func _update_line():
 	points = new_line_points
 
 
-func _bezier_interpolate(line: PoolVector2Array, subdivision: int) -> PoolVector2Array:
+func _bezier_interpolate(line: PackedVector2Array, subdivision: int) -> PackedVector2Array:
 	if subdivision < 1: return line
 	if line.size() < 3: return line
-	var output := PoolVector2Array()
+	var output := PackedVector2Array()
 	for i in range(line.size() - 1):
 		var a: Vector2
 		var b: Vector2
@@ -198,9 +198,9 @@ func _set_segment_count(value):
 
 func _set_max_angle_degrees(value):
 	max_angle_degrees = value
-	max_angle = deg2rad(value)
+	max_angle = deg_to_rad(value)
 
 
 func _set_max_angle(value):
 	max_angle = value
-	max_angle_degrees = rad2deg(value)
+	max_angle_degrees = deg_to_rad(value)
