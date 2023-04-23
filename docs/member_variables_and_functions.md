@@ -1,15 +1,9 @@
 # Overview & definitions
-An appendage is made out of a small amount of physically simulated points, which from now on I’ll simply call points.
+An appendage is made out of a small amount of physically simulated points, which from now on I’ll simply call points. The first of these points I call the root point, its location is always the global position of the appendage node.
 
-The first of these points I call the root point, its location is always the global position of the appendage node.
+The rotation of each point is considered to be the angle of the vector from its previous point to itself (the rotation of the root point is the global rotation of the appendage node). The target rotation of each point is the rotation it "wants to" be at.
 
-The rotation of each point is considered to be the angle of the vector from its previous point to itself.
-
-The rotation of the root point is the global rotation of the appendage node.
-
-The target rotation of each point is the rotation it "wants to" be at.
-
-The array of points is subdivided and smoothed before being set as the `points` for the `Line2D` class the appendages inherit from (this step is skipped if `subdivision` is 0)
+The array of points is subdivided and smoothed before being set as the `points` for the `Line2D` class the appendages inherit from (this step is skipped if `subdivision` is 0).
 
 # Member variables
 ## int `segment_count`
