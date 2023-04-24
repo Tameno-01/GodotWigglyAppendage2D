@@ -26,9 +26,6 @@ Target rotation = Rotation of previous point + [curvature] * Index ^ [curvature_
 ```
 (`Index` is a number that starts at 0 for the root point and increases by 1 for every consecutive point)
 
-## float `max_angle_degrees`
-`max_angle` in degrees instead of radians.
-
 ## float `max_angle`
 How far the rotation of each point it allowed to deviate from its target rotation (in radians).
 

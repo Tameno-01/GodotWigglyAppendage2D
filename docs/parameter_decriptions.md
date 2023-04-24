@@ -27,7 +27,7 @@ A value of 0 will have no effect.
 
 Unless `Curvature` is close to zero, this value should be itself close to zero (you'd rarely want it to be above 1, sometimes even 1 is too big).
 
-## `Max Angle Degrees`
+## `Max Angle`
 The maximum angle each physically simulated segment can bend.
 
 A value of 180 or more will remove any restrictions on much segments can bend.
