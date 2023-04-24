@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7iegmhxl3d2c"
-path="res://.godot/imported/GodotWigglyAppendage_Icon.png-8d807c82dc4f1c03a8e46dfc6e41f821.ctex"
+uid="uid://clua0rsx2i5g7"
+path="res://.godot/imported/PreviewThumbnail.png-df4cdd99b3e7aea68e62c592e3340108.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_lib/GodotWigglyAppendage_Icon.png"
-dest_files=["res://.godot/imported/GodotWigglyAppendage_Icon.png-8d807c82dc4f1c03a8e46dfc6e41f821.ctex"]
+source_file="res://asset_lib/PreviewThumbnail.png"
+dest_files=["res://.godot/imported/PreviewThumbnail.png-df4cdd99b3e7aea68e62c592e3340108.ctex"]
 
 [params]
 

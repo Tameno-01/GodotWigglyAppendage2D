@@ -1,72 +1,77 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://c8shdug7vru8w"]
 
-[ext_resource path="res://test/go_to_mouse.gd" type="Script" id=1]
-[ext_resource path="res://addons/wiggly_appendage_2d/wiggly_appendage_2d.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://test/GodotWigglyAppendage_tail_asset.png" type="Texture" id=4]
+[ext_resource type="Script" path="res://test/go_to_mouse.gd" id="1"]
+[ext_resource type="Script" path="res://addons/wiggly_appendage_2d/wiggly_appendage_2d.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://2n3dtr5jmtu8" path="res://icon.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dox1m6ds0jd46" path="res://test/GodotWigglyAppendage_tail_asset.png" id="4"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "wiggle wiggle"
 length = 2.0
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ 0.0, 90.0, 0.0 ]
+"values": [0.0, 90.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_guir3"]
+_data = {
+"RESET": SubResource("1"),
+"wiggle wiggle": SubResource("2")
 }
 
 [node name="test" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 3 )
-script = ExtResource( 1 )
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3")
+script = ExtResource("1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 autoplay = "wiggle wiggle"
-anims/RESET = SubResource( 1 )
-"anims/wiggle wiggle" = SubResource( 2 )
+libraries = {
+"": SubResource("AnimationLibrary_guir3")
+}
 
 [node name="WigglyAppendage2D" type="Line2D" parent="Sprite"]
-position = Vector2( -30, 0 )
+position = Vector2(-30, 0)
 rotation = 3.14159
-points = PoolVector2Array( 0, 0, 11.9263, 7.44805, 22.1968, 14.0023, 30.8115, 19.6628, 37.7704, 24.4295, 42.6509, 29.0122, 45.0302, 34.1205, 44.9084, 39.7544, 42.2856, 45.9139, 38.8349, 50.598, 36.2297, 51.8055, 34.4699, 49.5364, 33.5556, 43.7909, 34.0395, 37.4512, 36.4742, 33.3999, 40.8597, 31.637, 47.196, 32.1625, 53.1324, 34.4396, 56.318, 37.9314 )
+points = PackedVector2Array(0, 0, 13.8787, 2.12539, 25.7962, 4.40189, 35.7526, 6.8295, 43.7478, 9.40822, 50.6252, 12.3068, 57.2283, 15.6938, 63.5571, 19.5693, 69.6115, 23.9334, 75.2708, 28.7699, 80.4143, 34.0628, 85.0421, 39.8122, 89.1541, 46.0179, 92.6263, 52.5798, 95.3349, 59.3976, 97.2798, 66.4711, 98.461, 73.8005, 98.8601, 81.2137, 98.4586, 88.5387)
 width = 30.0
-default_color = Color( 1, 1, 1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource("4")
 texture_mode = 2
-script = ExtResource( 2 )
+script = ExtResource("2")
 curvature = 0.137
 curvature_exponent = 0.714
 subdivision = 4
 
 [node name="WigglyAppendage2D2" type="Line2D" parent="Sprite"]
-position = Vector2( 30, 0 )
-points = PoolVector2Array( 0, 0, 18.4235, 18.5585, 29.9421, 33.1758, 38.9614, 44.9505, 49.8871, 54.9816, 62.1089, 60.0932, 75.0161, 57.1096, 88.0604, 49.7361, 100.693, 41.6779, 112.879, 32.9588 )
-script = ExtResource( 2 )
+position = Vector2(30, 0)
+points = PackedVector2Array(0, 0, 0.000775814, 26.25, 0.00337791, 45, 0.00744557, 60, 0.0126181, 75, -0.0426619, 89.9995, -0.219952, 104.998, -0.3833, 119.997, -0.396756, 134.996, -0.260326, 149.995)
+script = ExtResource("2")
 stiffness = 0.0
-gravity = Vector2( 0, 20 )
+gravity = Vector2(0, 20)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
